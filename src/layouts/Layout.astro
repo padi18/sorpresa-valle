@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Una invitación especial...</title>
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Special+Elite&family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
+	</head>
+	<body class="bg-jury-dark text-white overflow-x-hidden antialiased">
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	html {
+		scroll-snap-type: y mandatory;
+		scroll-behavior: smooth;
+	}
+	
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+	}
+	
+	/* Custom Scrollbar */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+	::-webkit-scrollbar-track {
+		background: #0a0a0a;
+	}
+	::-webkit-scrollbar-thumb {
+		background: #8a0303;
+		border-radius: 4px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #a80404;
+	}
+</style>

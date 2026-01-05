@@ -1,0 +1,181 @@
+---
+import Ticket from './Ticket.astro';
+---
+
+<div class="relative w-full">
+  <!-- Fixed Background -->
+  <div class="fixed inset-0 z-0 bg-jury-dark pointer-events-none">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-jury-red/20 via-jury-dark to-jury-dark opacity-50"></div>
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+  </div>
+
+  <!-- Scroll Container -->
+  <main class="relative z-10">
+    
+    <!-- Intro Section -->
+    <section class="h-screen flex items-center justify-center panel first-panel snap-start snap-always">
+      <div class="text-center opacity-0 intro-text">
+        <h1 class="font-judicial text-4xl md:text-6xl text-white mb-4 tracking-widest">
+          CITACIÓN <span class="text-jury-red">JUDICIAL</span>
+        </h1>
+        <p class="font-detective text-gray-400 text-sm md:text-base animate-pulse">
+          Expediente #310126 • Desliza para confirmar
+        </p>
+      </div>
+    </section>
+
+    <!-- Question 1 -->
+    <section class="h-screen flex items-center justify-center panel snap-start snap-always">
+      <div class="max-w-3xl px-6 text-center">
+        <p class="font-judicial text-3xl md:text-5xl text-white leading-relaxed opacity-0 text-reveal">
+          Has sido oficialmente <span class="text-jury-red font-black border-b-2 border-jury-red">SELECCIONADA</span>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Case Details -->
+    <section class="h-screen flex items-center justify-center panel snap-start snap-always">
+      <div class="max-w-4xl px-6 text-center flex flex-col gap-8">
+        <h2 class="font-judicial text-xl md:text-2xl text-jury-red tracking-widest uppercase border-b border-jury-red/50 pb-4 self-center opacity-0 text-reveal">
+          CASO: DIAMANTES, MENTIRAS Y UN CADÁVER
+        </h2>
+        
+        <p class="font-detective text-2xl md:text-4xl text-white leading-relaxed opacity-0 text-reveal">
+          Un collar de 20 millones desaparecido. <br>
+          Un ex-chófer en el banquillo.
+        </p>
+
+        <p class="font-judicial text-lg md:text-2xl text-gray-400 opacity-0 text-reveal">
+          ¿Lana Tonneti dice la verdad? <br>
+          <span class="text-white font-bold mt-4 block text-xl md:text-3xl">Tu veredicto decidirá su destino.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Confirmation -->
+    <section class="h-screen flex items-center justify-center panel snap-start snap-always">
+      <div class="max-w-3xl px-6 text-center">
+        <p class="font-detective text-2xl md:text-4xl text-white opacity-0 text-reveal">
+          Prepárate. Tú eres el JURADO.
+        </p>
+      </div>
+    </section>
+
+    <!-- The Reveal -->
+    <section class="min-h-screen flex flex-col items-center justify-center panel py-20 snap-start snap-always">
+      <div class="text-center mb-12 opacity-0 reveal-content">
+        <h2 class="font-judicial text-5xl md:text-7xl text-jury-red mb-2 drop-shadow-[0_0_15px_rgba(138,3,3,0.5)]">
+          THE JURY
+        </h2>
+        <h3 class="font-judicial text-3xl md:text-5xl text-white tracking-[0.2em] mb-8">
+          EXPERIENCE
+        </h3>
+        <div class="w-24 h-1 bg-jury-red mx-auto"></div>
+      </div>
+
+      <!-- Tickets Container -->
+      <div class="flex flex-col md:flex-row gap-8 opacity-0 tickets-container transform translate-y-10">
+        <Ticket 
+          date="31 ENE 2026"
+          time="19:00H"
+          seat="JURADO 07"
+          location="Auditori L'illa"
+          guestName="Valle Domènech Santos"
+        />
+        <Ticket 
+          date="31 ENE 2026"
+          time="19:00H"
+          seat="JURADO 08"
+          location="Auditori L'illa"
+          guestName="Javier Padilla López"
+        />
+      </div>
+      
+      <div class="mt-12 opacity-0 final-msg flex flex-col items-center gap-6">
+        <a 
+          href="https://thejuryexperience.com/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="px-8 py-3 border-2 border-jury-red text-jury-red font-judicial hover:bg-jury-red hover:text-white transition-colors duration-300 tracking-widest uppercase text-sm"
+        >
+          Ver Detalles del Caso
+        </a>
+        <p class="font-detective text-gray-400 text-sm">
+          Caso asignado. No faltes.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Intro Animation
+  gsap.to(".intro-text", {
+    opacity: 1,
+    duration: 2,
+    ease: "power2.out",
+    delay: 0.5
+  });
+
+  // Text Reveal Sections
+  const textPanels = document.querySelectorAll(".text-reveal");
+  
+  textPanels.forEach((text) => {
+    gsap.to(text, {
+      scrollTrigger: {
+        trigger: text,
+        start: "top 70%",
+        end: "bottom 20%",
+        toggleActions: "play reverse play reverse",
+        // markers: true // Debug
+      },
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power3.out"
+    });
+  });
+
+  // Final Reveal
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".reveal-content",
+      start: "top 60%",
+    }
+  });
+
+  tl.to(".reveal-content", {
+    opacity: 1,
+    y: 0,
+    duration: 1.5,
+    ease: "power4.out"
+  })
+  .to(".tickets-container", {
+    opacity: 1,
+    y: 0,
+    duration: 1,
+    ease: "back.out(1.7)"
+  }, "-=0.5")
+  .to(".final-msg", {
+    opacity: 1,
+    duration: 1
+  });
+
+</script>
+
+<style>
+  .text-reveal {
+    transform: translateY(30px);
+  }
+
+  .bg-pattern {
+    background-image: radial-gradient(#2a2a2a 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+</style>
